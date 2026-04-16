@@ -1,9 +1,6 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
   --color-background: var(--background);
@@ -12,15 +9,105 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #faf9ff;
+  --foreground: #171717;
+}
+
+.dark {
+  --background: #0c0a1d;
+  --foreground: #ededed;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a78bfa;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8b5cf6;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.dark .glass {
+  background: rgba(30, 27, 75, 0.6);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #8b5cf6, #ec4899, #f97316);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Background gradient mesh */
+.bg-mesh {
+  background:
+    radial-gradient(at 20% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+    radial-gradient(at 80% 20%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+    radial-gradient(at 50% 80%, rgba(249, 115, 22, 0.1) 0%, transparent 50%);
+}
+
+.dark .bg-mesh {
+  background:
+    radial-gradient(at 20% 20%, rgba(139, 92, 246, 0.2) 0%, transparent 50%),
+    radial-gradient(at 80% 20%, rgba(236, 72, 153, 0.15) 0%, transparent 50%),
+    radial-gradient(at 50% 80%, rgba(249, 115, 22, 0.1) 0%, transparent 50%);
 }
