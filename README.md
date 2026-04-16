@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI 이미지 생성기
 
-## Getting Started
+무료 AI 이미지 생성기 — 텍스트를 입력하면 Pollinations.ai가 이미지를 생성합니다. 비용 0원.
 
-First, run the development server:
+Live: https://ai-image-generator-beryl-sigma.vercel.app
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 기능
+
+- 7가지 스타일 프리셋 (기본, 아이콘, 일러스트, 3D, 수채화, 픽셀아트, 실사)
+- 3가지 비율 선택 (1:1, 16:9, 9:16)
+- 다크모드 / 라이트모드 (시스템 설정 자동 감지)
+- 생성 히스토리 갤러리 (localStorage, 최대 50장)
+- 이미지 다운로드
+- 전체 이미지 모달 뷰
+- 반응형 디자인 (모바일 + 데스크톱)
+
+## 기술 스택
+
+| 항목 | 기술 |
+|------|------|
+| 프레임워크 | Next.js 16 (App Router) |
+| 언어 | TypeScript |
+| 스타일링 | Tailwind CSS v4 |
+| 이미지 생성 | Pollinations.ai (FLUX 모델) |
+| 배포 | Vercel |
+| 비용 | 0원 |
+
+## 프로젝트 구조
+
+```
+src/
+├── app/
+│   ├── layout.tsx          # 루트 레이아웃 (한국어 메타데이터)
+│   ├── page.tsx            # 메인 페이지
+│   └── globals.css         # 글로벌 스타일, 애니메이션
+├── components/
+│   ├── PromptInput.tsx     # 프롬프트 입력 (자동 회전 플레이스홀더)
+│   ├── StyleSelector.tsx   # 스타일 프리셋 선택
+│   ├── SizeSelector.tsx    # 이미지 비율 선택
+│   ├── GenerateButton.tsx  # 생성 버튼 (쉬머 애니메이션)
+│   ├── ImageResult.tsx     # 생성 결과 표시
+│   ├── ImageModal.tsx      # 전체 이미지 모달
+│   ├── Gallery.tsx         # 히스토리 갤러리 그리드
+│   └── ThemeToggle.tsx     # 다크모드 토글
+├── hooks/
+│   ├── useImageGenerator.ts # 이미지 생성 로직
+│   └── useTheme.ts          # 테마 관리
+└── lib/
+    ├── types.ts            # 타입 정의
+    ├── constants.ts        # 스타일/사이즈/플레이스홀더 상수
+    └── storage.ts          # localStorage CRUD
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 로컬 개발
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+git clone https://github.com/sigco3111/ai-image-generator.git
+cd ai-image-generator
+npm install
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+http://localhost:3000 에서 확인.
 
-## Learn More
+## 배포
 
-To learn more about Next.js, take a look at the following resources:
+GitHub main 브랜치에 푸시하면 Vercel에서 자동 배포됩니다.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+수동 배포:
+```bash
+vercel --yes --prod
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 라이선스
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
