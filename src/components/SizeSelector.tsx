@@ -10,32 +10,45 @@ interface SizeSelectorProps {
 export default function SizeSelector({ selected, onSelect }: SizeSelectorProps) {
   return (
     <div className="w-full">
-      <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
-        📐 이미지 크기
+      <label
+        className="block text-xs font-medium uppercase tracking-wider mb-3"
+        style={{ color: "var(--text-secondary)" }}
+      >
+        비율
       </label>
       <div className="flex gap-3">
-        {SIZE_OPTIONS.map((size) => (
-          <button
-            key={size.id}
-            onClick={() => onSelect(size.id)}
-            className={`flex flex-col items-center gap-1 px-5 py-3 rounded-xl text-sm font-medium transition-all duration-200 border-2 ${
-              selected === size.id
-                ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white border-transparent shadow-lg shadow-purple-500/25 scale-105"
-                : "bg-white/70 dark:bg-gray-800/70 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 hover:shadow-md"
-            }`}
-          >
-            <div
-              className={`border-2 rounded-sm ${
-                selected === size.id ? "border-white" : "border-gray-400 dark:border-gray-500"
-              }`}
+        {SIZE_OPTIONS.map((size) => {
+          const isSelected = selected === size.id;
+          return (
+            <button
+              key={size.id}
+              onClick={() => onSelect(size.id)}
+              className="flex flex-col items-center gap-1.5 px-5 py-3 rounded-lg text-sm font-medium transition-colors duration-150"
               style={{
-                width: size.width > size.height ? "28px" : "20px",
-                height: size.width > size.height ? "20px" : "28px",
+                background: isSelected ? "var(--accent)" : "var(--surface-secondary)",
+                color: isSelected ? "#ffffff" : "var(--text)",
+                border: isSelected ? "1px solid var(--accent)" : "1px solid var(--border)",
               }}
-            />
-            <span>{size.label}</span>
-          </button>
-        ))}
+              onMouseEnter={(e) => {
+                if (!isSelected) e.currentTarget.style.borderColor = "var(--text-secondary)";
+              }}
+              onMouseLeave={(e) => {
+                if (!isSelected) e.currentTarget.style.borderColor = "var(--border)";
+              }}
+            >
+              <div
+                className="rounded-sm"
+                style={{
+                  border: "1.5px solid",
+                  borderColor: isSelected ? "#ffffff" : "var(--text-secondary)",
+                  width: size.width > size.height ? "28px" : "20px",
+                  height: size.width > size.height ? "20px" : "28px",
+                }}
+              />
+              <span>{size.label}</span>
+            </button>
+          );
+        })}
       </div>
     </div>
   );

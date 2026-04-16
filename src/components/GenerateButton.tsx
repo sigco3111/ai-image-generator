@@ -7,32 +7,38 @@ interface GenerateButtonProps {
 }
 
 export default function GenerateButton({ onClick, isGenerating, hasPrompt }: GenerateButtonProps) {
+  const disabled = isGenerating || !hasPrompt;
+
   return (
     <button
       onClick={onClick}
-      disabled={isGenerating || !hasPrompt}
-      className={`relative w-full py-4 rounded-2xl text-white font-bold text-lg transition-all duration-300 overflow-hidden ${
-        isGenerating || !hasPrompt
-          ? "bg-gray-400 dark:bg-gray-600 cursor-not-allowed"
-          : "bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 hover:from-purple-700 hover:via-pink-700 hover:to-orange-600 shadow-xl shadow-purple-500/25 hover:shadow-2xl hover:shadow-purple-500/40 hover:scale-[1.02] active:scale-[0.98]"
-      }`}
+      disabled={disabled}
+      className="relative w-full py-3.5 rounded-lg font-semibold text-base transition-colors duration-150"
+      style={{
+        background: disabled ? "var(--surface-secondary)" : "var(--accent)",
+        color: disabled ? "var(--text-secondary)" : "#ffffff",
+        cursor: disabled ? "not-allowed" : "pointer",
+        border: "1px solid",
+        borderColor: disabled ? "var(--border)" : "var(--accent)",
+      }}
+      onMouseEnter={(e) => {
+        if (!disabled) e.currentTarget.style.background = "var(--accent-hover)";
+      }}
+      onMouseLeave={(e) => {
+        if (!disabled) e.currentTarget.style.background = "var(--accent)";
+      }}
     >
-      {/* Animated background for generating state */}
-      {isGenerating && (
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 animate-[shimmer_2s_infinite] bg-[length:200%_100%]" />
-      )}
-      
-      <span className="relative flex items-center justify-center gap-3">
+      <span className="flex items-center justify-center gap-2">
         {isGenerating ? (
           <>
-            <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+            <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
               <circle
                 className="opacity-25"
                 cx="12"
                 cy="12"
                 r="10"
                 stroke="currentColor"
-                strokeWidth="4"
+                strokeWidth="3"
                 fill="none"
               />
               <path
@@ -44,9 +50,7 @@ export default function GenerateButton({ onClick, isGenerating, hasPrompt }: Gen
             이미지 생성 중...
           </>
         ) : (
-          <>
-            ✨ AI 이미지 생성
-          </>
+          "이미지 생성"
         )}
       </span>
     </button>

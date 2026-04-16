@@ -16,24 +16,45 @@ export default function Gallery({ images, onDelete, onClearAll, onDownload, onSe
   return (
     <div className="w-full">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-          🖼️ 생성 기록
-          <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
-            ({images.length}장)
+        <h2 className="flex items-center gap-2">
+          <span
+            className="text-xs font-medium uppercase tracking-wider"
+            style={{ color: "var(--text-secondary)" }}
+          >
+            생성 기록
+          </span>
+          <span
+            className="text-xs font-medium px-1.5 py-0.5 rounded"
+            style={{
+              color: "var(--text-secondary)",
+              background: "var(--surface-secondary)",
+            }}
+          >
+            {images.length}
           </span>
         </h2>
         <button
           onClick={onClearAll}
-          className="text-sm text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition-colors px-3 py-1.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
+          className="text-xs transition-colors duration-150 px-2.5 py-1 rounded-md"
+          style={{ color: "var(--text-secondary)" }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.color = "#ef4444";
+            e.currentTarget.style.background = "var(--surface-secondary)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.color = "var(--text-secondary)";
+            e.currentTarget.style.background = "transparent";
+          }}
         >
           전체 삭제
         </button>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
         {images.map((image) => (
           <div
             key={image.id}
-            className="group relative aspect-square rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-800 cursor-pointer shadow-md hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
+            className="group relative aspect-square rounded-lg overflow-hidden cursor-pointer"
+            style={{ background: "var(--surface-secondary)" }}
             onClick={() => onSelect(image)}
           >
             <img
@@ -43,9 +64,12 @@ export default function Gallery({ images, onDelete, onClearAll, onDownload, onSe
               loading="lazy"
             />
             {/* Hover overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+            <div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-150"
+              style={{ background: "rgba(0, 0, 0, 0.4)" }}
+            />
             {/* Info overlay */}
-            <div className="absolute bottom-0 left-0 right-0 p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            <div className="absolute bottom-0 left-0 right-0 p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
               <p className="text-white text-xs font-medium line-clamp-2">{image.prompt}</p>
               <div className="flex items-center justify-between mt-1">
                 <span className="text-white/70 text-[10px]">{image.style} · {image.size}</span>
@@ -55,7 +79,7 @@ export default function Gallery({ images, onDelete, onClearAll, onDownload, onSe
                       e.stopPropagation();
                       onDownload(image);
                     }}
-                    className="p-1 bg-white/20 hover:bg-white/30 rounded-md transition-colors"
+                    className="p-1 bg-white/20 hover:bg-white/30 rounded transition-colors"
                     title="다운로드"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -67,7 +91,7 @@ export default function Gallery({ images, onDelete, onClearAll, onDownload, onSe
                       e.stopPropagation();
                       onDelete(image.id);
                     }}
-                    className="p-1 bg-white/20 hover:bg-red-500/50 rounded-md transition-colors"
+                    className="p-1 bg-white/20 hover:bg-red-500/50 rounded transition-colors"
                     title="삭제"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
