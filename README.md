@@ -2,7 +2,9 @@
 
 텍스트 프롬프트를 입력하면 AI가 이미지를 생성합니다. 비용 0원, 서버 없이 브라우저에서 동작.
 
-Live: https://ai-image-generator-beryl-sigma.vercel.app
+Live Demo : https://sigco3111.github.io/ai-image-generator/
+
+[![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub%20Pages-222222?style=for-the-badge&logo=githubpages&logoColor=white)](https://sigco3111.github.io/ai-image-generator/)
 
 ## 기능
 
@@ -21,7 +23,7 @@ Live: https://ai-image-generator-beryl-sigma.vercel.app
 | 언어 | TypeScript |
 | 스타일링 | Tailwind CSS v4 |
 | 이미지 생성 | Pollinations.ai (FLUX 모델) |
-| 배포 | Vercel |
+| 배포 | GitHub Pages (Vercel → Pages 전환 2026-08) |
 | 비용 | 0원 |
 
 ## 디자인
@@ -82,9 +84,10 @@ http://localhost:3000 에서 확인.
 
 ## 배포
 
-GitHub main 브랜치에 푸시하면 Vercel에서 자동 배포됩니다.
+GitHub `main` 브랜치에 푸시하면 GitHub Pages(`gh-pages` 브랜치)에서 자동 배포됩니다.
+과거에는 Vercel에 배포되었으며, 2026-08에 GitHub Pages로 전환되었습니다.
 
-수동 배포:
+수동 배포 (Vercel CLI — 과거 배포 이력 보존 차원에서 유지):
 ```bash
 vercel --yes --prod
 ```
