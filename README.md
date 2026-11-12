@@ -8,6 +8,10 @@ Live Demo : https://sigco3111.github.io/ai-image-generator/
 
 ## 📸 실제 실행 화면
 
+![AI 이미지 생성기 실제 화면](4-ai-image-generator.jpg)
+
+## 📸 실제 실행 화면
+
 ![AI 이미지 생성기 실제 화면]()
 
 ## 기능
