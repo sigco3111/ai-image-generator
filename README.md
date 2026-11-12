@@ -6,6 +6,10 @@ Live Demo : https://sigco3111.github.io/ai-image-generator/
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub%20Pages-222222?style=for-the-badge&logo=githubpages&logoColor=white)](https://sigco3111.github.io/ai-image-generator/)
 
+## 📸 실제 실행 화면
+
+![AI 이미지 생성기 실제 화면]()
+
 ## 기능
 
 - 7가지 스타일 프리셋 (기본, 아이콘, 일러스트, 3D, 수채화, 픽셀아트, 실사)
